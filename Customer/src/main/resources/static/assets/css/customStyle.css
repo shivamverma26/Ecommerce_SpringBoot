@@ -1,0 +1,110 @@
+.catagoryStyle {
+    transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    border-width: 2px !important;
+}
+
+a.customHoverPink,
+.customHoverPink {
+    transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+}
+
+a.customHoverPink:hover,
+.customHoverPink:hover {
+    color: #fd4a6f !important;
+}
+
+.catagoryStyle:hover {
+    cursor: pointer;
+    border-color: #fd4a6f !important;
+    transform: translateY(-7%);
+    -webkit-transform: translateY(-7%);
+    -moz-transform: translateY(-7%);
+    -ms-transform: translateY(-7%);
+    -o-transform: translateY(-7%);
+    box-shadow: 0px 6px 9px 0px #fd4a6f80;
+}
+
+.bg-pink {
+    background: #fd4a6f !important;
+}
+
+button {
+    transition: all .3s ease !important;
+    -webkit-transition: all .3s ease !important;
+    -moz-transition: all .3s ease !important;
+    -ms-transition: all .3s ease !important;
+    -o-transition: all .3s ease !important;
+}
+
+.bg-pink:hover {background: #d13756 !important;}
+
+.customFloat li {
+    float: left !important;
+}
+
+.bold {
+    font-weight: 500 !important;
+}
+
+.font-roboto {
+    font-family: Roboto, sans-serif !important;
+}
+
+.signInForm {
+    background-color: #f5f7fa;
+}
+
+.customAncor {
+    color: #fd4a6f !important;
+}
+
+.customAncor:hover {
+    text-decoration: underline;
+}
+
+.customFont {
+    font-size: 16px;
+}
+
+.preloader {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background: #fff;
+    z-index: 99999999;
+}
+
+.preloader img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+img.card-img-top {
+    transition: all .4s ease !important;
+}
+
+.custom-overflow-hidden {
+    overflow: hidden !important;
+}
+
+img.admin-logo-width {
+    width: 120px !important;
+}
+
+img.card-img-top:hover {
+    transform: rotate(5deg) scale(1.3) !important;
+}
+
+#navigation3 .nav-dropdown {
+    padding-top: 25px;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-scompiler-id="0" xmlns:th = "https://www.thymeleaf.org/">
+
+<head th:replace="fregments :: header"></head>
+
+<body>
+<div class="min-h-100 p-0 p-sm-6 d-flex align-items-stretch">
+    <div class="card w-25x flex-grow-1 flex-sm-grow-0 m-sm-auto">
+        <div class="card-body p-sm-5 m-sm-3 flex-grow-0">
+            <h1 class="mb-5 fs-3 text-center">Sign Up</h1>
+            <div th:if = "${emailError}">
+                <p class = "alert alert-danger" th:text = "${emailError}"></p>
+            </div>
+            <div th:if = "${errors}">
+                <p class = "alert alert-danger" th:text = "${errors}"></p>
+            </div>
+            <div th:if = "${success}">
+                <p class = "alert alert-success" th:text = "${success}"></p>
+            </div>
+            <div th:if = "${passwordError}">
+                <p class = "alert alert-danger" th:text = "${passwordError}"></p>
+            </div>
+
+            <!-- Form -->
+            <form th:action = "@{/register-new}" th:object = "${adminDto}" method="POST">
+                <div class="mb-4">
+                    <label class="form-label">First name</label>
+                    <input type="text" th:field = "*{firstName}" class="form-control form-control-lg" />
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}"th:errors = "*{firstName}"></div>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Last name</label>
+                    <input type="text" th:field = "*{lastName}" class="form-control form-control-lg" />
+                    <div class="alert alert-danger" th:if = "${#fields.hasErrors('lastName')}"th:errors = "*{lastName}"></div>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" th:field = "*{username}" class="form-control form-control-lg" />
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Password</label>
+                    <input type="password" th:field = "*{password}" class="form-control form-control-lg" />
+                    <div class="alert alert-danger" th:if = "${#fields.hasErrors('password')}" th:errors = "*{password}"></div>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Repeat Password</label>
+                    <input type="password" th:field = "*{repeatPassword}" class="form-control form-control-lg" />
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary btn-lg w-100">Sign Up</button>
+                </div>
+            </form>
+        </div>
+        <div class="card-body pb-2 mb-3 mt-0 pb-2 pt-0 flex-grow-0">
+            <div class="form-group mb-3 mt-0 pt-0 text-center text-muted">Already have an account? <a class="customAncor" th:href="@{/login}">Sign in</a></div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fregments :: scripts"></div>
+</body>
+
+</html>

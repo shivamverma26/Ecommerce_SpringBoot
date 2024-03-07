@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head th:replace="fragmenta :: head-link"></head>
+
+<body>
+
+<div th:replace="fragmenta :: preloader"></div>
+
+<div id="main-wrapper">
+
+	<div th:replace="fragmenta :: top-header"></div>
+
+	<div th:replace="fragmenta :: title-menu"></div>
+
+	<div class="clearfix"></div>
+
+			<section class="middle">
+				<div class="container">
+					<form th:action="@{/add-to-cart}" method="post">
+						<div class="row justify-content-between">
+						<div class="col-xl-5 col-lg-6 col-md-12 col-sm-12">
+							<div class="quick_view_slide">
+								<div class="single_view_slide">
+									<a th:href="*{'data:image/jpeg;base64,' + product.image}" data-lightbox="roadtrip" class="d-block mb-4">
+										<img th:src="*{'data:image/jpeg;base64,' + product.image}" class="img-fluid rounded" th:alt="${product.name}" />
+									</a>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-xl-7 col-lg-6 col-md-12 col-sm-12">
+							<div class="prd_details pl-3">
+								<input type="hidden" th:value="${product.id}" name="id">
+								<div class="prt_01 mb-1">
+									<span class="text-light bg-info rounded px-2 py-1" th:text="${product.category.name}"></span>
+								</div>
+								<div class="prt_02 mb-3">
+									<h2 class="ft-bold mb-1" th:text="${product.name}"></h2>
+									<div class="text-left">
+										<div class="elis_rty">
+											<span class="ft-medium text-muted line-through fs-md mr-2" th:text="'$' + ${product.costPrice}"></span>
+											<span class="ft-bold theme-cl fs-lg mr-2" th:text="'$' + ${product.salePrice}"></span>
+										</div>
+									</div>
+								</div>
+								
+								<div class="prt_03 mb-4">
+									<p th:text="${product.description}"></p>
+								</div>
+								<div class="prt_05 mb-4">
+									<div class="form-row mb-7">
+										<div class="col-12 col-lg">
+											<!-- Submit -->
+											<button th:if = "${session.username != null}" type="submit" class="btn btn-block custom-height bg-dark mb-2">
+												<i class="lni lni-shopping-basket mr-2"></i>Add to Cart 
+											</button>
+										</div>
+								  </div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</form>
+				</div>
+			</section>
+
+			<!-- ======================= Similar Products Start ============================ -->
+			<section class="middle pt-0">
+				<div class="container">
+					
+					<div class="row justify-content-center">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+							<div class="sec_title position-relative text-center">
+								<h2 class="off_title">Similar Products</h2>
+								<h3 class="ft-bold pt-3">Matching Products</h3>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+							<div class="slide_items">
+								
+								<!-- single Item -->
+								<div class="single_itesm" th:each="productRelated : ${products}">
+									<div class="product_grid card b-0 mb-0">
+										<input type="hidden" th:value="${product.id}" name="id">
+										<div class="card-body p-0">
+											<div class="shop_thumb position-relative">
+												<a class="card-img-top d-block overflow-hidden" th:href = "@{/find-product/{id}(id = ${productRelated.id})}">
+													<img class="card-img-top" th:src="*{'data:image/jpeg;base64,' + productRelated.image}" th:alt="${productRelated.name}">
+												</a>
+												<div class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center">
+													<div class="edlio">
+														<a th:href = "@{/find-product/{id}(id = ${productRelated.id})}" class="text-white fs-sm ft-medium">
+															<i class="fas fa-eye mr-1"></i>Quick View</a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="card-footer b-0 p-3 pb-0 d-flex align-items-start justify-content-center">
+											<div class="text-left">
+												<div class="text-center">
+													<h5 class="fw-bolder fs-md mb-0 lh-1 mb-1"><a href="shop-single-v1.html" th:text="${productRelated.name}"></a></h5>
+													<div class="elis_rty"><span class="ft-bold fs-md text-dark" th:text="${productRelated.salePrice}"></span></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- ======================= Similar Products Start ============================ -->
+
+	<section th:replace="fragmenta :: features"></section>
+
+	<footer th:replace="fragmenta :: footer"></footer>
+
+	<a id="back2Top" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
+
+</div>
+<div th:replace="fragmenta :: scripts"></div>
+</body>
+</html>

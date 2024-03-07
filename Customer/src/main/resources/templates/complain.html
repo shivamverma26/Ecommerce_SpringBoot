@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragmenta :: head-link"></head>
+<body>
+<div th:replace="fragmenta :: preloader"></div>
+<div id="main-wrapper">
+	<div th:replace="fragmenta :: top-header"></div>
+	<div th:replace="fragmenta :: title-menu"></div>
+
+
+	<section class="middle">
+				<div class="container">
+				
+					<div class="row justify-content-center">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+							<div class="sec_title position-relative text-center">
+								<h2 class="off_title">Contact Us</h2>
+								<h3 class="ft-bold pt-3">Send Complain</h3>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row align-items-start justify-content-between">
+
+						<div class="text alert alert-warning" th:if = "${error}">
+							<p th:text="${error}"></p>
+						</div>
+						<div class="text alert alert-success" th:if = "${success}">
+							<p th:text="${success}"></p>
+						</div>
+
+						<div class="col-xl-7 col-lg-8 mx-auto col-md-12 col-sm-12">
+							<form th:action="@{/new-complain}" class="row" method="post" th:object="${complain}">
+									
+								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+									<div class="form-group">
+										<label class="small text-dark ft-medium">Your Name *</label>
+										<input th:field="*{name}" type="text" class="form-control">
+									</div>
+								</div>
+								
+								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+									<div class="form-group">
+										<label class="small text-dark ft-medium">Your Email *</label>
+										<input th:field="*{email}" type="text" class="form-control">
+									</div>
+								</div>
+								
+								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+									<div class="form-group">
+										<label class="small text-dark ft-medium">Subject</label>
+										<input th:field="*{subject}" type="text" class="form-control">
+									</div>
+								</div>
+								
+								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+									<div class="form-group">
+										<label class="small text-dark ft-medium">Message</label>
+										<textarea th:field="*{message}" class="form-control ht-80"></textarea>
+									</div>
+								</div>
+								
+								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+									<div class="form-group">
+										<button type="submit" class="btn btn-dark">Send Message</button>
+									</div>
+								</div>
+								
+							</form>
+						</div>
+						
+					</div>
+				</div>
+			</section>
+
+
+
+	<section th:replace="fragmenta :: features"></section>
+	<footer th:replace="fragmenta :: footer"></footer>
+	<a id="back2Top" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
+
+</div>
+<div th:replace="fragmenta :: scripts"></div>
+</body>
+</html>

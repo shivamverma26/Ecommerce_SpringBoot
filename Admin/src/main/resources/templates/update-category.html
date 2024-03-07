@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-scompiler-id="0" xmlns="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fregments :: header"></head>
+
+<body>
+
+    <div class="sa-app sa-app--desktop-sidebar-shown sa-app--mobile-sidebar-hidden sa-app--toolbar-fixed">
+
+        <div th:replace="fregments :: sidebar"></div>
+
+        <div class="sa-app__content">
+
+            <div th:replace="fregments :: toolbar"></div>
+
+            <div id="top" class="sa-app__body">
+                <div class="mx-sm-2 px-2 px-sm-3 px-xxl-4 pb-6">
+                    <div class="container container--max--xl">
+                        <form th:action="@{/update-category}" th:object="${category}" method="put">
+                            <div class="py-5">
+                                <div class="row g-4 align-items-center">
+                                    <div class="col">
+                                        <h1 class="h3 m-0">Edit Category</h1>
+                                    </div>
+
+                                    <div class="col-auto d-flex">
+                                        <a th:if = "${category.is_activated} == false" th:href="@{/deleteCategory/{id}(id=${category.id})}" class="btn btn-secondary me-3">Delete</a>
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sa-entity-layout" data-sa-container-query="{&quot;920&quot;:&quot;sa-entity-layout--size--md&quot;,&quot;1100&quot;:&quot;sa-entity-layout--size--lg&quot;}">
+                                <div class="sa-entity-layout__body">
+                                    <div class="sa-entity-layout__main">
+                                        <div class="card">
+                                            <div class="card-body p-5">
+                                                <div class="mb-5">
+                                                    <h2 class="mb-0 fs-exact-18">Basic information</h2>
+                                                </div>
+                                                <div class="mb-3 visually-hidden">
+                                                    <label for="form-category/id" class="form-label">Category Id</label>
+                                                    <input required type="text" class="form-control" id="form-category/id" th:field="*{id}" readonly />
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="form-category/name" class="form-label">Name</label>
+                                                    <input required th:field="*{name}" type="text" class="form-control" id="form-category/name" value="" />
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="form-category/description" class="form-label">Description</label>
+                                                    <textarea required th:field="*{description}" id="form-category/description" class="form-control" rows="8"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sa-entity-layout__sidebar">
+                                        <div class="card w-100 mt-0">
+                                            <div class="card-body p-5">
+                                                <div class="mb-5">
+                                                    <h2 class="mb-0 fs-exact-18">Image</h2>
+                                                </div>
+                                                <div class="border p-4 d-flex justify-content-center">
+                                                    <div class="">
+                                                        <img src="images/products/product-7-320x320.jpg" class="img-fluid" width="150" height="auto" alt=""/>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-4 mb-n2">
+                                                    <input type="file" name="productImage" id="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div th:replace="fregments :: copyright"></div>
+        </div>
+        <div class="sa-app__toasts toast-container bottom-0 end-0"></div>
+    </div>
+    <div th:replace="fregments :: scripts"></div>
+</body>
+</html>

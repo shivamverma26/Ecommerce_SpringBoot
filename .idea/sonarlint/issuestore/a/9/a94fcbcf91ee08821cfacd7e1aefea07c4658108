@@ -1,0 +1,13 @@
+
+h
+java:S1192*"MDefine a constant instead of duplicating this literal "shoppingCart" 3 times.(¤ Òüÿÿÿÿ
+f
+java:S1192 "PDefine a constant instead of duplicating this literal "redirect:/login" 4 times.(ØÆŠú
+g
+java:S2259("JA "NullPointerException" could be thrown; "shoppingCart" is nullable here.(”˜ÁÃ8ãµòú™0
+D
+java:S1481=")Remove this unused "cart" local variable.(¡§ıÛúÿÿÿÿ
+_
+java:S4488C"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(°œ¿`
+`
+java:S4488Y"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(€ÀèĞ

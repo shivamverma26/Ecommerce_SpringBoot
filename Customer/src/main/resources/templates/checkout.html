@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head th:replace="fragmenta :: head-link"></head>
+
+<body>
+
+<div th:replace="fragmenta :: preloader"></div>
+
+<div id="main-wrapper">
+
+	<div th:replace="fragmenta :: top-header"></div>
+
+	<div th:replace="fragmenta :: title-menu"></div>
+
+	<div class="clearfix"></div>
+
+			<section class="middle">
+				<div class="container">
+				
+					<div class="row">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+							<div class="text-center d-block mb-5">
+								<h2>Checkout</h2>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row justify-content-between">
+						<div class="col-12 col-lg-7 col-md-12">
+							<form>
+								<h5 class="mb-4 ft-medium">Billing Details</h5>
+								<div class="row mb-2">
+									
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+										<div class="form-group">
+											<label class="text-dark">First Name *</label>
+											<input type="text" class="form-control" th:value="${customer.firstName}" readonly />
+										</div>
+									</div>
+									
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+										<div class="form-group">
+											<label class="text-dark">Last Name *</label>
+											<input type="text" class="form-control" th:value="${customer.lastName}" readonly />
+										</div>
+									</div>
+									
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+										<div class="form-group">
+											<label class="text-dark">Email *</label>
+											<input type="email" class="form-control" th:value="${customer.username}" readonly />
+										</div>
+									</div>
+
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+										<div class="form-group">
+											<label class="text-dark">Mobile Number *</label>
+											<input type="text" class="form-control" th:value="${customer.phoneNumber}" readonly />
+										</div>
+									</div>
+									
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+										<div class="form-group">
+											<label class="text-dark">Address</label>
+											<input type="text" class="form-control" th:value="${customer.address + ' ' + customer.city + ' ' + customer.country}" readonly />
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						
+						<!-- Sidebar -->
+						<div class="col-12 col-lg-4 col-md-12">
+							<div class="d-block mb-3">
+								<h5 class="mb-4">Order Items (<span th:text="${cart.totalItems}"></span>)</h5>
+								<ul class="list-group list-group-sm list-group-flush-y list-group-flush-x mb-4">
+									
+									<li class="list-group-item" th:each="item : ${cart.cartItem}">
+										<div class="row align-items-center">
+											<div class="col-3">
+												<a th:href = "@{/find-product/{id}(id = ${item.product.id})}" >
+													<img th:src="*{'data:image/jpeg;base64,' + item.product.image}" class="img-fluid" th:alt="${item.product.name}">
+												</a>
+											</div>
+											<div class="col d-flex align-items-center">
+												<div class="cart_single_caption pl-2">
+													<h4 class="product_title fs-md ft-medium mb-1 lh-1" th:text="${item.product.name}"></h4>
+													<p class="mb-1 lh-1"><span class="text-dark">Category: <span th:text="${item.product.category.name}"></span></span></p>
+													<p class="mb-1 lh-1"><span class="text-dark">Each Price: <span th:text="${item.product.salePrice}"></span></span></p>
+													<p class="mb-3 lh-1"><span class="text-dark">Quantity: <span th:text="${item.quantity}"></span></span></p>
+													<h4 class="fs-md ft-medium mb-3 lh-1">Total: $<span th:text="${item.totalPrice}"></span></h4>
+												</div>
+											</div>
+										</div>
+									</li>
+									
+								</ul>
+							</div>
+							
+							<div class="card mb-4 gray">
+							  <div class="card-body">
+								<ul class="list-group list-group-sm list-group-flush-y list-group-flush-x">
+								  <li class="list-group-item d-flex text-dark fs-sm ft-regular">
+									<span>Subtotal</span> <span class="ml-auto text-dark ft-medium" th:text="'$' + ${cart.totalPrices}"></span>
+								  </li>
+								  <li class="list-group-item d-flex text-dark fs-sm ft-regular">
+									<span>Discount</span> <span class="ml-auto text-dark ft-medium" th:text="'$' + ${discountPrice}"></span>
+								  </li>
+								  <li class="list-group-item d-flex text-dark fs-sm ft-regular">
+									<span>Total</span> <span class="ml-auto text-dark ft-medium" th:text = " '$' + ${cart.totalPrices - discountPrice}"></span>
+								  </li>
+								</ul>
+							  </div>
+							</div>
+							<a class="btn btn-block btn-dark mb-3" th:href="@{/save-order}">Place Your Order</a>
+						</div>
+					</div>
+					
+				</div>
+			</section>
+
+	<section th:replace="fragmenta :: features"></section>
+
+	<footer th:replace="fragmenta :: footer"></footer>
+
+	<a id="back2Top" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
+
+</div>
+<div th:replace="fragmenta :: scripts"></div>
+
+</body>
+
+</html>

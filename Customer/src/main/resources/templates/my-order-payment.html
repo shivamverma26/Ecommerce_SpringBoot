@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head th:replace="fragmenta :: head-link"></head>
+
+<body>
+
+<div th:replace="fragmenta :: preloader"></div>
+
+<div id="main-wrapper">
+
+	<div th:replace="fragmenta :: top-header"></div>
+
+	<div th:replace="fragmenta :: title-menu"></div>
+
+	<!-- End Navigation -->
+	<div class="clearfix"></div>
+
+			<section class="middle">
+				<div class="container">
+					<div class="row">
+					
+						<div th:replace="fragmenta :: profileSideBar"></div>
+						<div class="text alert alert-warning" th:if = "${error}">
+							<p th:text="${error}"></p>
+						</div>
+
+						<form th:action="@{/order-payment/{id} (id = ${order.id})}" th:object="${order}" method="post">
+							<h2 th:text="${'Order id: ' + id}"></h2>
+
+							<div class="mb-4">
+								<label for="paymentType" class="form-label">Order payment type</label>
+								<select style="width: 100%" class="form-control mb-5" id="paymentType" th:field="*{paymentType}">
+									<option value="CASH">CASH</option>
+									<option value="ONLINE" selected>ONLINE</option>
+								</select>
+
+								<label for="transitionId" class="form-label">Transition Id</label>
+								<input style="width: 100%" id="transitionId" th:field="*{transitionId}" name="transitionId" class="form-control" />
+							</div>
+
+							<div class="mb-4">
+								<button type="submit" class="btn btn-theme stretched-link hover-black">Make Payment</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</section>
+
+		<section th:replace="fragmenta :: features"></section>
+
+		<footer th:replace="fragmenta :: footer"></footer>
+
+		<a id="back2Top" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
+
+	</div>
+
+	<div th:replace="fragmenta :: scripts"></div>
+
+</body>
+</html>

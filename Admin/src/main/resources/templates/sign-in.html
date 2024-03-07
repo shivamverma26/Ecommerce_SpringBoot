@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-scompiler-id="0" xmlns:th = "https://www.thymeleaf.org/">
+
+<head th:replace="fregments :: header"></head>
+
+<body>
+<div class="min-h-100 p-0 p-sm-6 d-flex align-items-stretch">
+	<div class="card w-25x flex-grow-1 flex-sm-grow-0 m-sm-auto">
+		<div class="card-body p-sm-5 m-sm-3 flex-grow-0">
+			<h1 class="mb-5 fs-3 text-center">Sign In</h1>
+
+			<div th:if = "${param.error}" class="alert alert-danger text-center">
+				Invalid username or password
+			</div>
+			<div th:if = "${param.logout}" class="alert alert-success text-center">
+				You have been logged out!
+			</div>
+
+			<form th:action="@{/do-login}" method="post">
+				<div class="mb-4">
+					<label class="form-label">Email Address</label>
+					<input type="email" name="username" id="username" class="form-control form-control-lg" />
+				</div>
+				<div class="mb-4">
+					<label class="form-label">Password</label>
+					<input type="password" name="password" id="password" class="form-control form-control-lg" />
+				</div>
+				<div class="mb-2 row py-3 flex-wrap">
+					<a class="text-end small" th:href = "@{/forgot-password}" href="forgot-password.html">Forgot Password?</a>
+				</div>
+				<div>
+					<button type="submit" class="btn btn-primary btn-lg w-100">Sign In</button>
+				</div>
+			</form>
+		</div>
+		<div class="card-body pb-5 my-1 flex-grow-0">
+			<div class="form-group mb-0 mt-1 pt-1 text-center text-muted">Don&#x27;t have an account? <a class="customAncor" th:href = "@{/register}">Sign Up</a></div>
+		</div>
+	</div>
+</div>
+
+<div th:replace="fregments :: scripts"></div>
+
+</body>
+</html>

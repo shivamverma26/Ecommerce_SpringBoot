@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-scompiler-id="0" xmlns="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fregments :: header"></head>
+
+<body>
+    <!-- sa-app -->
+    <div class="sa-app sa-app--desktop-sidebar-shown sa-app--mobile-sidebar-hidden sa-app--toolbar-fixed">
+
+        <div th:replace="fregments :: sidebar"></div>
+
+        <!-- sa-app__content -->
+        <div class="sa-app__content">
+
+            <div th:replace="fregments :: toolbar"></div>
+
+
+            <!-- sa-app__body -->
+            <div id="top" class="sa-app__body">
+                <div class="mx-sm-2 px-2 px-sm-3 px-xxl-4 pb-6">
+                    <div class="container">
+                        <div class="py-5">
+                            <div class="row g-4 align-items-center">
+                                <div class="col">
+                                    <h1 class="h3 m-0">Categories</h1>
+                                </div>
+                                <div class="col-auto d-flex"><a th:href="@{/new-category}" class="btn btn-primary">New category</a></div>
+                            </div>
+                        </div>
+                        <div th:if = "${success}" class="text-center alert alert-success">
+                            <p class="mb-0" th:text="${success}"></p>
+                        </div>
+                        <div th:if = "${failed}" class="text-center alert alert-danger">
+                            <p class="mb-0" th:text="${failed}"></p>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div th:if="${size == 0}">
+                                    <p>No Category Found</p>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sl</th>
+                                            <th class="min-w-10x">Name</th>
+                                            <th>Visibility</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody th:if="${size > 0}">
+                                        <tr th:each="category, iter : ${categories}">
+                                            <td th:text="${iter.index+1}"></td>
+                                            <td th:text="${category.name}">Electronic</td>
+                                            <td>
+                                                <a th:if = "${category.is_activated} == true" th:href="@{/hide-category/(id = ${category.id})}" class="btn btn-warning text-white">Hide</a>
+                                                <a th:if = "${category.is_activated} == false" th:href="@{/visible-category/(id = ${category.id})}" class="btn btn-primary">Visible</a>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sa-muted btn-sm" type="button" id="category-context-menu-0"
+                                                        data-bs-toggle="dropdown" aria-expanded="false" aria-label="More">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="3" height="13" fill="currentColor">
+                                                            <path
+                                                                d="M1.5,8C0.7,8,0,7.3,0,6.5S0.7,5,1.5,5S3,5.7,3,6.5S2.3,8,1.5,8z M1.5,3C0.7,3,0,2.3,0,1.5S0.7,0,1.5,0 S3,0.7,3,1.5S2.3,3,1.5,3z M1.5,10C2.3,10,3,10.7,3,11.5S2.3,13,1.5,13S0,12.3,0,11.5S0.7,10,1.5,10z">
+                                                            </path>
+                                                        </svg>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="category-context-menu-0">
+                                                        <li><a class="dropdown-item" th:href="@{/editCategory/{id}(id=${category.id})}">Edit</a></li>
+                                                        <li><a th:if = "${category.is_activated} == false" th:href="@{/deleteCategory/{id}(id=${category.id})}" class="dropdown-item text-danger">Delete</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:replace="fregments :: copyright"></div>
+        </div>
+        <div class="sa-app__toasts toast-container bottom-0 end-0"></div>
+    </div>
+    <div th:replace="fregments :: scripts"></div>
+</body>
+</html>

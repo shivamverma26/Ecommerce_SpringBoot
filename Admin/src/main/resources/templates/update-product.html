@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-scompiler-id="0" xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="fregments :: header"></head>
+<body>
+
+<div class="sa-app sa-app--desktop-sidebar-shown sa-app--mobile-sidebar-hidden sa-app--toolbar-fixed">
+
+    <div th:replace="fregments :: sidebar"></div>
+
+    <div class="sa-app__content">
+
+        <div th:replace="fregments :: toolbar"></div>
+
+            <div id="top" class="sa-app__body">
+                <div class="mx-sm-2 px-2 px-sm-3 px-xxl-4 pb-6">
+                    <div class="container">
+                        <form th:action="@{/update-product/{id} (id = ${productDto.id})}" method="post" enctype="multipart/form-data" th:object = "${productDto}">
+                            <div class="py-5">
+                                <div class="row g-4 align-items-center">
+                                    <div class="col">
+                                        <h1 class="h3 m-0">Edit Product</h1>
+                                    </div>
+                                    <div class="col-auto d-flex">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sa-entity-layout" data-sa-container-query="{&quot;920&quot;:&quot;sa-entity-layout--size--md&quot;,&quot;1100&quot;:&quot;sa-entity-layout--size--lg&quot;}">
+                                <div class="sa-entity-layout__body">
+                                    <div class="sa-entity-layout__main">
+                                        <div class="card">
+                                            <div class="card-body p-5">
+                                                <div class="mb-5">
+                                                    <h2 class="mb-0 fs-exact-18">Basic information</h2></div>
+                                                <div class="mb-4">
+                                                    <label for="name" class="form-label">Name</label>
+                                                    <input type="text" required th:field="*{name}" class="form-control" id="name"/>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="description" class="form-label">Description</label>
+                                                    <textarea id="description" th:field="*{description}" name="description" class="form-control" rows="4"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mt-5">
+                                            <div class="card-body p-5">
+                                                <div class="mb-5">
+                                                    <h2 class="mb-0 fs-exact-18">Pricing</h2></div>
+                                                <div class="row g-4">
+                                                    <div class="col">
+                                                        <label for="costPrice" class="form-label">Price</label>
+                                                        <input type="number" th:field="*{costPrice}" name="costPrice" class="form-control" id="costPrice"/>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="salePrice" class="form-label">Discounted price</label>
+                                                        <input type="number" class="form-control" th:field="*{salePrice}" name="salePrice" id="salePrice" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sa-entity-layout__sidebar">
+                                        <div class="card w-100 mt-0">
+                                            <div class="card-body p-5">
+                                                <div class="mb-5">
+                                                    <h2 class="mb-0 fs-exact-18">Category</h2>
+                                                </div>
+                                                <select class="sa-select2 form-select" name="category" id="category">
+                                                    <option th:each="category : ${categories}"
+                                                            th:value="${category.id}"
+                                                            th:text="${category.name}">
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="card w-100 mt-5">
+                                            <div class="card-body p-5">
+                                                <div class="mb-5">
+                                                    <h2 class="mb-0 fs-exact-18">Current Stock</h2>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <input type="number" th:field="*{currentQuantity}" class="form-control" name="currentQuantity" id="currentQuantity" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card w-100 mt-5">
+                                            <div class="card-body p-5">
+                                                <div class="mb-5">
+                                                    <h2 class="mb-0 fs-exact-18">Image</h2>
+                                                </div>
+                                                <div class="border p-4 d-flex justify-content-center">
+                                                    <img th:src = "*{'data:image/jpeg;base64,' + {image}}" class="img-fluid" width="150" height="auto" th:alt="${productDto.name}"/>
+                                                </div>
+                                                <div class="mt-4 mb-n2">
+                                                    <input class="form-control" id="imageProduct" name="imageProduct" type="file">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div th:replace="fregments :: copyright"></div>
+
+        </div>
+    </div>
+
+    <div th:replace="fregments :: scripts"></div>
+</body>
+</html>

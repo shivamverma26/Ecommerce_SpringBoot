@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:fragment="head-link">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title th:text = "${title}"></title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i"/>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{../assets/css/frontEndStyles.css}">
+    <link rel="stylesheet" th:href="@{../assets/css/customStyle.css}">
+    <link th:href="@{../assets/images/favicon.png}" rel="icon" type="image/png"/>
+</head>
+<body>
+
+    <div th:fragment="preloader">
+        <div class="preloader">
+            <img th:src="@{assets/images/loading.gif}" alt="...">
+        </div>
+    </div>
+
+    <div th:fragment="top-header">
+        <div class="py-2 br-bottom">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-xl-7 col-lg-6 col-md-6 col-sm-12 hide-ipad">
+                        <div class="top_second">
+                            <p class="medium text-muted m-0 p-0"><i class="lni lni-phone fs-sm"></i> Mobile <a href="tel:+8801870179066" class="medium text-dark text-underline">+880 1870-179066</a></p>
+                        </div>
+                    </div>
+
+                    <!-- Right Menu -->
+                    <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12">
+                        <div class="currency-selector dropdown js-dropdown float-right mr-3">
+                            <nav id="navigation3" class="navigation navigation-landscape">
+                                <div class="nav-menus-wrapper" style="transition-property: none;">
+                                    <ul class="nav-menu">
+                                        <li class="text-muted">
+                                            <i class="lni lni-user mr-1"></i>
+                                            <a href="#" class="medium text-muted m-0 p-0" th:text="${session.username != null} ? ${session.username} : 'Sign In / Register'"></a>
+                                            <ul class="nav-dropdown nav-submenu">
+                                                <li th:if = "${session.username == null}" ><a th:href="@{/login}">Sign in</a></li>
+                                                <li th:if = "${session.username != null}"><a th:href="@{/logout}">Sign Out</a></li>
+                                                <li><a th:href="@{/register}">Sign Up</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="headd-sty header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12">
+                        <div class="headd-sty-wrap d-flex align-items-center justify-content-between py-3">
+                            <div class="headd-sty-left d-flex align-items-center">
+                                <div class="headd-sty-01">
+                                    <a class="nav-brand py-0" th:href="@{/}">
+                                        <img th:src="@{../assets/images/logo.png}" class="logo" alt="" />
+                                    </a>
+                                </div>
+                                <div class="headd-sty-02 ml-3">
+                                    <form class="bg-white rounded-md border-bold">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control custom-height b-0"
+                                                   placeholder="Search for products..." />
+                                            <div class="input-group-append">
+                                                <div class="input-group-text"><button
+                                                        class="btn bg-white text-danger custom-height rounded px-3"
+                                                        type="button"><i class="fas fa-search"></i></button></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="headd-sty-last">
+                                <nav id="navigation2" class="navigation navigation-landscape">
+                                <div class="nav-menus-wrapper" style="transition-property: none;">
+                                    <ul class="nav-menu">
+                                        <li>
+                                            <a th:href="@{/cart}">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <i class="fas fa-shopping-basket fs-lg"></i>
+                                                    <span class="dn-counter theme-bg" th:text = "${session.totalItems == null} ? '0' : ${session.totalItems}"></span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="title-menu" class="headerd header-dark head-style-2">
+        <div class="container">
+            <nav id="navigation" class="navigation navigation-landscape">
+                <div class="nav-header">
+                    <div class="nav-toggle"></div>
+                    <div class="nav-menus-wrapper">
+                        <ul class="nav-menu">
+                            <li><a th:href="@{/}" class="pl-0">Home</a></li>
+                            <li><a th:href="@{/products}">Shop</a></li>
+                            <li><a th:href="@{/high-price}">High Price</a></li>
+                            <li><a th:href="@{/low-price}">Low Price</a></li>
+                            <li><a th:href="@{/complain}">Complain</a></li>
+                            <li>
+                                <a href="#">My Account</a>
+                                <ul class="nav-dropdown nav-submenu">
+                                    <li class=""><a th:href="@{/account}">Account Info</a></li>
+                                    <li class=""><a th:href="@{/order}">Orders</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div th:fragment="profileSideBar" class="col-12 col-md-12 col-lg-4 col-xl-4 text-center miliods">
+            <div class="d-block border rounded mfliud-bot">
+                <div class="dashboard_author px-2 py-5">
+                    <div class="dash_auth_thumb circle p-1 border d-inline-flex mx-auto mb-2">
+                        <img th:src="@{assets/images/team-1.jpg}" class="img-fluid circle" width="100" alt=""/>
+                    </div>
+                    <div class="dash_caption">
+                        <h4 class="fs-md ft-medium mb-0 lh-1" th:text="${customer.firstName + ' ' + customer.lastName}"></h4>
+                    </div>
+                </div>
+
+                <div class="dashboard_author">
+                    <h4 class="px-3 py-2 mb-0 lh-2 gray fs-sm ft-medium text-muted text-uppercase text-left">Dashboard Navigation</h4>
+                    <ul class="dahs_navbar">
+                        <li><a th:href="@{/order}"><i class="lni lni-shopping-basket mr-2"></i>My Order</a></li>
+                        <li><a th:href="@{/account}"><i class="lni lni-user mr-2"></i>Profile Info</a></li>
+                        <li><a th:href="@{/logout}"><i class="lni lni-power-switch mr-2"></i>Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    <section th:fragment="features" class="px-0 py-3 br-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="d-flex align-items-center justify-content-start py-2">
+                        <div class="d_ico">
+                            <i class="fas fa-shopping-basket"></i>
+                        </div>
+                        <div class="d_capt">
+                            <h5 class="mb-0">5% Discount</h5>
+                            <span class="text-muted">Capped at $1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="d-flex align-items-center justify-content-start py-2">
+                        <div class="d_ico">
+                            <i class="fa fa-percent" aria-hidden="true"></i>
+                        </div>
+                        <div class="d_capt">
+                            <h5 class="mb-0">8% Discount</h5>
+                            <span class="text-muted">Capped at $2000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="d-flex align-items-center justify-content-start py-2">
+                        <div class="d_ico">
+                            <i class="fas fa-shopping-basket"></i>
+                        </div>
+                        <div class="d_capt">
+                            <h5 class="mb-0">15% Discount</h5>
+                            <span class="text-muted">Capped at $3000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="d-flex align-items-center justify-content-start py-2">
+                        <div class="d_ico">
+                            <i class="fas fa-headphones-alt"></i>
+                        </div>
+                        <div class="d_capt">
+                            <h5 class="mb-0">24x7 Fully Support</h5>
+                            <span class="text-muted">Get friendly support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer th:fragment="footer" class="dark-footer skin-dark-footer style-2">
+        <div class="footer-middle">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                        <div class="footer_widget">
+                            <img src="assets/images/logo-light.png" class="img-footer small mb-2" alt="" />
+
+                            <div class="address mt-3">
+                                3298 Grant Street Longview, TX<br>United Kingdom 75601
+                            </div>
+                            <div class="address mt-3">
+                                1-202-555-0106<br>help@shopper.com
+                            </div>
+                            <div class="address mt-3">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><a href="#"><i class="lni lni-facebook-filled"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="lni lni-twitter-filled"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="lni lni-youtube"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="lni lni-instagram-filled"></i></a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                        <div class="footer_widget">
+                            <h4 class="widget_title">Supports</h4>
+                            <ul class="footer-menu">
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#">About Page</a></li>
+                                <li><a href="#">Size Guide</a></li>
+                                <li><a href="#">Shipping & Returns</a></li>
+                                <li><a href="#">FAQ's Page</a></li>
+                                <li><a href="#">Privacy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                        <div class="footer_widget">
+                            <h4 class="widget_title">Shop</h4>
+                            <ul class="footer-menu">
+                                <li><a href="#">Men's Shopping</a></li>
+                                <li><a href="#">Women's Shopping</a></li>
+                                <li><a href="#">Kids's Shopping</a></li>
+                                <li><a href="#">Furniture</a></li>
+                                <li><a href="#">Discounts</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                        <div class="footer_widget">
+                            <h4 class="widget_title">Company</h4>
+                            <ul class="footer-menu">
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Affiliate</a></li>
+                                <li><a th:href="@{/login}">Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                        <div class="footer_widget">
+                            <h4 class="widget_title">Subscribe</h4>
+                            <p>Receive updates, hot deals, discounts sent straignt in your inbox daily</p>
+                            <div class="foot-news-last">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Email Address">
+                                    <div class="input-group-append">
+                                        <button type="button" class="input-group-text b-0 text-light"><i class="lni lni-arrow-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="address mt-3">
+                                <h5 class="fs-sm text-light">Secure Payments</h5>
+                                <div class="scr_payment"><img src="assets/images/card.png" class="img-fluid" alt="" /></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12 col-md-12 text-center">
+                        <p class="mb-0">© 2021 Kumo. Designd By <a href="https://themezhub.com/">ThemezHub</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div th:fragment="scripts">
+        <script th:src="@{../assets/js/jquery.min.js}"></script>
+        <script th:src="@{../assets/js/popper.min.js}"></script>
+        <script th:src="@{../assets/js/bootstrap.min.js}"></script>
+        <script th:src="@{../assets/js/ion.rangeSlider.min.js}"></script>
+        <script th:src="@{../assets/js/slick.js}"></script>
+        <script th:src="@{../assets/js/slider-bg.js}"></script>
+        <script th:src="@{../assets/js/lightbox.js}"></script>
+        <script th:src="@{../assets/js/smoothproducts.js}"></script>
+        <script th:src="@{../assets/js/snackbar.min.js}"></script>
+        <script th:src="@{../assets/js/jQuery.style.switcher.js}"></script>
+        <script th:src="@{../assets/js/custom.js}"></script>
+
+        <script>
+            function openWishlist() {
+                document.getElementById("Wishlist").style.display = "block";
+            }
+            function closeWishlist() {
+                document.getElementById("Wishlist").style.display = "none";
+            }
+        </script>
+
+        <script>
+            function openCart() {
+                document.getElementById("Cart").style.display = "block";
+            }
+            function closeCart() {
+                document.getElementById("Cart").style.display = "none";
+            }
+        </script>
+
+        <script>
+            function openSearch() {
+                document.getElementById("Search").style.display = "block";
+            }
+            function closeSearch() {
+                document.getElementById("Search").style.display = "none";
+            }
+        </script>
+    </div>
+</body>
+</html>

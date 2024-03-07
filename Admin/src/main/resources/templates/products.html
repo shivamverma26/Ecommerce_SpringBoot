@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-scompiler-id="0" xmlns="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fregments :: header"></head>
+
+<body>
+    <!-- sa-app -->
+    <div class="sa-app sa-app--desktop-sidebar-shown sa-app--mobile-sidebar-hidden sa-app--toolbar-fixed">
+
+        <div th:replace="fregments :: sidebar"></div>
+
+        <!-- sa-app__content -->
+        <div class="sa-app__content">
+
+            <div th:replace="fregments :: toolbar"></div>
+
+
+            <!-- sa-app__body -->
+            <div id="top" class="sa-app__body">
+                <div class="mx-sm-2 px-2 px-sm-3 px-xxl-4 pb-6">
+                    <div class="container">
+                        <div class="pt-5">
+                            <div class="row g-4 align-items-center">
+                                <div class="col">
+                                    <h1 class="h3 m-0">Products</h1>
+                                </div>
+                                <div class="col-auto d-flex"><a th:href="@{/new-product}" class="btn btn-primary">New Product</a></div>
+                            </div>
+                        </div>
+                        <div class="pb-5 pt-4">
+                            <div class="sa-toolbar__item sa-toolbar__item--search">
+                                <form class="sa-search sa-search--state--pending" th:action="@{/search-result/0}" method="get">
+                                    <div class="sa-search__body">
+                                        <div class="sa-search__icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
+                                                <path d="M16.243 14.828C16.243 14.828 16.047 15.308 15.701 15.654C15.34 16.015 14.828 16.242 14.828 16.242L10.321 11.736C9.247 12.522 7.933 13 6.5 13C2.91 13 0 10.09 0 6.5C0 2.91 2.91 0 6.5 0C10.09 0 13 2.91 13 6.5C13 7.933 12.522 9.247 11.736 10.321L16.243 14.828ZM6.5 2C4.015 2 2 4.015 2 6.5C2 8.985 4.015 11 6.5 11C8.985 11 11 8.985 11 6.5C11 4.015 8.985 2 6.5 2Z"></path>
+                                            </svg>
+                                        </div>
+                                        <input type="text" id="search" name="keyword" class="sa-search__input" placeholder="Enter the product name" />
+                                        <button class="sa-search__cancel d-sm-none" type="button" aria-label="Close search">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                                                <path d="M10.8,10.8L10.8,10.8c-0.4,0.4-1,0.4-1.4,0L6,7.4l-3.4,3.4c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L4.6,6L1.2,2.6 c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L6,4.6l3.4-3.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L7.4,6l3.4,3.4 C11.2,9.8,11.2,10.4,10.8,10.8z"></path>
+                                            </svg>
+                                        </button>
+                                        <button type="submit" class = "btn btn-primary">Search</button>
+                                        <div class="sa-search__field"></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div th:if = "${success}" class="text-center alert alert-success">
+                            <p class="mb-0" th:text="${success}"></p>
+                        </div>
+                        <div th:if = "${failed}" class="text-center alert alert-danger">
+                            <p class="mb-0" th:text="${failed}"></p>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div th:if="${size == 0}">
+                                    <p>No Category Found</p>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sl</th>
+                                            <th class="min-w-8x">Name</th>
+                                            <th>Category</th>
+                                            <th>Sale Price</th>
+                                            <th>Cost Price</th>
+                                            <th>Quantity</th>
+                                            <th>Image</th>
+                                            <th>Visibility</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody th:if="${size > 0}">
+                                        <tr th:each="product, iter : ${products}">
+                                            <td th:text="${iter.index+1}"></td>
+                                            <td th:text="${product.name}"></td>
+                                            <td th:text="${product.category.name}"></td>
+                                            <td th:text="${product.salePrice}"></td>
+                                            <td th:text="${product.costPrice}"></td>
+                                            <td th:text="${product.currentQuantity}"></td>
+                                            <td>
+                                                <img src="" style="height: auto; width: 50px;" th:src = "*{'data:image/jpeg;base64,' + {product.image}}" th:alt="${product.name}">
+                                            </td>
+                                            <td>
+                                                <a th:if = "${product.activated == false}" th:href="@{/visible-product/{id} (id = ${product.id})}" class="badge badge-sa-success">Enable</a>
+                                                <a th:if = "${product.deleted == false}" th:href = "@{/hide-product/{id} (id = ${product.id})}" class="badge badge-sa-danger">Hide</a>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sa-muted btn-sm" type="button" id="category-context-menu-0"
+                                                        data-bs-toggle="dropdown" aria-expanded="false" aria-label="More">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="3" height="13" fill="currentColor">
+                                                            <path
+                                                                d="M1.5,8C0.7,8,0,7.3,0,6.5S0.7,5,1.5,5S3,5.7,3,6.5S2.3,8,1.5,8z M1.5,3C0.7,3,0,2.3,0,1.5S0.7,0,1.5,0 S3,0.7,3,1.5S2.3,3,1.5,3z M1.5,10C2.3,10,3,10.7,3,11.5S2.3,13,1.5,13S0,12.3,0,11.5S0.7,10,1.5,10z">
+                                                            </path>
+                                                        </svg>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="category-context-menu-0">
+                                                        <li><a class="dropdown-item" th:href="@{/update-product/{id}(id=${product.id})}">Edit</a></li>
+                                                        <li><a th:if = "${product.deleted} == true" th:href="@{/deleteProduct/{id}(id=${product.id})}" class="dropdown-item text-danger">Delete</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="mt-5">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination d-flex justify-content-center">
+                                            <li th:if = "${currentPage != 0}" class="page-item">
+                                                <a th:href="@{'/products/' + ${currentPage - 1}}" class="page-link" href="#">Previous</a>
+                                            </li>
+                                            <li th:each = "i : ${#numbers.sequence(1, totalPages)}" th:classappend="${currentPage == i - 1 ? 'active' : ''}" class="page-item">
+                                                <a th:href="@{'/products/' + ${i - 1}}" class="page-link" href="#"><span th:text = "${i}"></span></a>
+                                            </li>
+                                            <li th:if = "${currentPage + 1 != totalPages}" class="page-item">
+                                                <a th:href="@{'/products/' + ${currentPage + 1}}" class="page-link" href="#">Next</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:replace="fregments :: copyright"></div>
+        </div>
+        <div class="sa-app__toasts toast-container bottom-0 end-0"></div>
+    </div>
+    <div th:replace="fregments :: scripts"></div>
+</body>
+</html>

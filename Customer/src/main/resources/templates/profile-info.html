@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head th:replace="fragmenta :: head-link"></head>
+
+<body>
+
+<div th:replace="fragmenta :: preloader"></div>
+
+<div id="main-wrapper">
+
+	<div th:replace="fragmenta :: top-header"></div>
+
+	<div th:replace="fragmenta :: title-menu"></div>
+
+	<!-- End Navigation -->
+	<div class="clearfix"></div>
+
+			<section class="middle">
+				<div class="container">
+					<div class="row align-items-start justify-content-between">
+
+						<div th:replace="fragmenta :: profileSideBar"></div>
+						
+						<div class="col-12 col-md-12 col-lg-8 col-xl-8">
+							<div class="row">
+								<div class="text alert alert-warning" th:if = "${error}">
+									<p th:text="${error}"></p>
+								</div>
+							</div>
+							<div class="row align-items-center">
+								<form class="row m-0" th:action="@{/update-infor}" method="put" name="signupForm" id="signupForm" th:object="${customer}">
+									<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+										<div class="form-group">
+											<label class="small text-dark ft-medium">First Name *</label>
+											<input type="text" class="form-control" th:field = "*{firstName}" id="firstname" name="firstname"/>
+										</div>
+									</div>
+									
+									<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+										<div class="form-group">
+											<label class="small text-dark ft-medium">Last Name *</label>
+											<input type="text" class="form-control" id="lastname" th:field = "*{lastName}" name="lastname"/>
+										</div>
+									</div>
+									
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+										<div class="form-group">
+											<label class="small text-dark ft-medium">Email ID *</label>
+											<input type="email" class="form-control" id="username" th:field = "*{username}" readonly name="username"/>
+										</div>
+									</div>
+
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+										<div class="form-group">
+											<label class="small text-dark ft-medium">Phone Number *</label>
+											<input type="text" class="form-control" id="phoneNumber" th:field = "*{phoneNumber}" name="phoneNumber"/>
+										</div>
+									</div>
+
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+										<div class="form-group">
+											<label class="small text-dark ft-medium">Address *</label>
+											<input type="text" class="form-control" id="address" th:field = "*{address}" name="address"/>
+										</div>
+									</div>
+
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+										<div class="form-group">
+											<label class="small text-dark ft-medium">City *</label>
+											<input type="text" class="form-control" id="city" th:field = "*{city}" name="city"/>
+										</div>
+									</div>
+
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+										<div class="form-group">
+											<label class="small text-dark ft-medium">Country *</label>
+											<input type="text" class="form-control" id="country" th:field = "*{country}" name="country"/>
+										</div>
+									</div>
+									
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+										<div class="form-group">
+											<button type="submit" id="submitButton" class="btn btn-dark">Save Changes</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		<section th:replace="fragmenta :: features"></section>
+
+		<footer th:replace="fragmenta :: footer"></footer>
+
+		<a id="back2Top" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
+
+	</div>
+
+	<div th:replace="fragmenta :: scripts"></div>
+
+</body>
+</html>

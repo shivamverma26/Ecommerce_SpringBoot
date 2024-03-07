@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-scompiler-id="0" xmlns="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fregments :: header"></head>
+
+<body>
+    <!-- sa-app -->
+    <div class="sa-app sa-app--desktop-sidebar-shown sa-app--mobile-sidebar-hidden sa-app--toolbar-fixed">
+
+        <div th:replace="fregments :: sidebar"></div>
+
+        <!-- sa-app__content -->
+        <div class="sa-app__content">
+
+            <div th:replace="fregments :: toolbar"></div>
+
+
+            <!-- sa-app__body -->
+            <div id="top" class="sa-app__body">
+                <div class="mx-sm-2 px-2 px-sm-3 px-xxl-4 pb-6">
+                    <div class="container">
+                        <div class="pt-5">
+                            <div class="row g-4 align-items-center">
+                                <div class="col">
+                                    <h1 class="h3 mb-4">Complain</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <button th:if="${size == 0}" th:text="${size}" type="submit" class = "btn btn-dark"></button>
+                        <div class="card">
+                            <div class="card-body">
+                                <div th:if="${size == 0}">
+                                    <p>No Category Found</p>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sl</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Address</th>
+                                            <th>City</th>
+                                            <th>Country</th>
+                                            <th>Phone Number</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody th:if="${size > 0}">
+                                        <tr th:each="customer, iter : ${customers}">
+                                            <td th:text="${iter.index+1}"></td>
+                                            <td th:text="${customer.firstName + customer.lastName}"></td>
+                                            <td th:text="${customer.username}"></td>
+                                            <td th:text="${customer.address}"></td>
+                                            <td th:text="${customer.city}"></td>
+                                            <td th:text="${customer.country}"></td>
+                                            <td th:text="${customer.phoneNumber}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:replace="fregments :: copyright"></div>
+        </div>
+        <div class="sa-app__toasts toast-container bottom-0 end-0"></div>
+    </div>
+    <div th:replace="fregments :: scripts"></div>
+</body>
+</html>

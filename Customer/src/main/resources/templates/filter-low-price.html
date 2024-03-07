@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head th:replace="fragmenta :: head-link"></head>
+
+<body>
+
+	<div th:replace="fragmenta :: preloader"></div>
+
+	<div id="main-wrapper">
+
+		<div th:replace="fragmenta :: top-header"></div>
+
+		<div th:replace="fragmenta :: title-menu"></div>
+
+		<div class="clearfix"></div>
+
+		<!-- ======================= Product List ======================== -->
+		<section class="middle">
+			<div class="container" th:each = "category : ${categories}">
+
+				<div class="row justify-content-center">
+					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+						<div class="sec_title position-relative text-center">
+							<h1 class="ft-bold pt-3" th:text="${category.name}" ></h1>
+						</div>
+					</div>
+				</div>
+
+				<div class="row align-items-center rows-products">
+					<div class="col-xl-3 col-lg-4 col-md-6 col-6" th:each="product : ${products}" th:if = "${product.category.id == category.id}">
+						<div class="product_grid card b-0">
+							<form th:action="@{/add-to-cart}" method="post">
+								<div class="card-body p-0">
+									<div class="shop_thumb position-relative">
+										<input type="hidden" th:value="${product.id}" name="id">
+										<a class="card-img-top d-block overflow-hidden custom-overflow-hidden" th:href = "@{/find-product/{id}(id = ${product.id})}">
+											<img th:src="*{'data:image/jpeg;base64,' + product.image}" class="img-fluid" th:alt="${product.name}">
+										</a>
+										<div class="product-left-hover-overlay">
+											<ul class="left-over-buttons">
+												<li>
+													<a th:href = "@{/find-product/{id}(id = ${product.id})}" class="d-inline-flex circle align-items-center justify-content-center">
+														<i class="fas fa-expand-arrows-alt position-absolute"></i>
+													</a>
+												</li>
+												<li th:if = "${session.username != null}">
+													<button type="submit" class="d-inline-flex circle align-items-center justify-content-center snackbar-addcart">
+														<i class="fas fa-shopping-basket position-absolute"></i>
+													</button>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="card-footer b-0 p-0 pt-2 bg-white d-flex align-items-start justify-content-between">
+									<div class="text-left">
+										<div class="text-left">
+											<h5 class="fs-md mb-0 lh-1 mb-1">
+												<a th:href = "@{/find-product/{id}(id = ${product.id})}" th:text="${product.name}"></a>
+											</h5>
+											<div class="elis_rty">
+	<!--											<span class="ft-bold text-dark fs-sm">$99 - $129</span>-->
+												<span class="text-muted ft-medium line-through mr-2" th:text="${product.costPrice}"></span>
+												<span class="ft-bold theme-cl fs-md" th:text="${product.salePrice}"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section th:replace="fragmenta :: features"></section>
+
+		<footer th:replace="fragmenta :: footer"></footer>
+
+		<a id="back2Top" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
+
+	</div>
+	<div th:replace="fragmenta :: scripts"></div>
+
+</body>
+
+</html>
