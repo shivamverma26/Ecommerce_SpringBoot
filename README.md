@@ -94,6 +94,3 @@ With an insatiable appetite for innovation and a fervent dedication to mastering
 ## 🔗 Social Links
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shivamverma61/)
 [![verma.shivam2605@gmail.com](https://img.shields.io/badge/gmail-4267B2?style=for-the-badge&logo=gmail&logoColor=white)](mailto:verma.shivam2605@gmail.com)
-
-## License
-[MIT License](/LICENSE)
